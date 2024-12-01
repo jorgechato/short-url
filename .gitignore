@@ -1,5 +1,6 @@
 .out
 .envrc
+wrangler.toml
 # prod
 dist/
 

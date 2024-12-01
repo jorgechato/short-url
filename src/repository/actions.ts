@@ -3,7 +3,7 @@ import type { ShortUrl, ThinShortUrl } from '@/models/shortUrl.d';
 import type { SQL } from 'drizzle-orm';
 import type { Context } from 'hono';
 import { shortUrl } from '@/models/shortUrl';
-import { db } from '@/repository/turso';
+import { db } from '@/repository/d1';
 import { AlreadyExists } from '@/routes/errors';
 import { generateAlias } from '@/utils/crypto';
 import { eq, like, or } from 'drizzle-orm';

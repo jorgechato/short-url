@@ -3,9 +3,12 @@ import type { Config } from 'drizzle-kit';
 export default {
   schema: 'src/models/shortUrl.ts',
   out: 'db/migrations',
-  dialect: 'turso',
+  dialect: 'sqlite',
+  driver: 'd1-http',
+  tablesFilter: ['/^(?!.*_cf_KV).*$/'], // Due to a bug in drizzle-kit: https://x.jrg.tools/ohDdDb
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
-    authToken: process.env.DATABASE_TOKEN,
+    accountId: process.env.ACCOUNT_ID!,
+    databaseId: process.env.DATABASE_ID!,
+    token: process.env.DATABASE_TOKEN!,
   },
 } satisfies Config;

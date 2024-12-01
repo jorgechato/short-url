@@ -1,5 +1,4 @@
 export interface Bindings {
-  DATABASE_URL: string;
-  DATABASE_TOKEN?: string;
+  DB: D1Database;
   PRIVATE_KEY: string;
 }

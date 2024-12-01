@@ -1,15 +1,15 @@
 {
   "name": "short-url",
   "scripts": {
+    "d1": "wrangler d1",
     "dev": "wrangler dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "db:makemigration": "DATABASE_URL=$env.DATABASE_URL_PROD DATABASE_TOKEN=$env.DATABASE_TOKEN_PROD drizzle-kit generate --config=./db/short-url.drizzle.config.ts",
-    "db:migrate": "DATABASE_URL=$env.DATABASE_URL_PROD DATABASE_TOKEN=$env.DATABASE_TOKEN_PROD drizzle-kit migrate --config=./db/short-url.drizzle.config.ts",
-    "db:push": "drizzle-kit push --config=./db/short-url.drizzle.config.ts",
-    "db:prod:push": "DATABASE_URL=$env.DATABASE_URL_PROD DATABASE_TOKEN=$env.DATABASE_TOKEN_PROD drizzle-kit push --config=./db/short-url.drizzle.config.ts",
-    "db:start": "turso dev --db-file .out/local-short-url.sqlite3",
-    "db:dump": "turso db shell short-url .dump > .out/dump.sql",
-    "db:populate": "turso db shell http://127.0.0.1:8080 < .out/dump.sql",
+    "db:makemigration": "drizzle-kit generate --config=./db/short-url.drizzle.config.ts",
+    "db:migrate": "wrangler d1 migrations apply short-url --local",
+    "db:prod:migrate": "drizzle-kit migrate --config=./db/short-url.drizzle.config.ts",
+    "db:prod:push": "drizzle-kit push --config=./db/short-url.drizzle.config.ts",
+    "db:dump": "",
+    "db:populate": "wrangler d1 execute short-url --local --file .out/dump.sql",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "deploy": "wrangler deploy --minify"
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.11.0",
     "@cloudflare/workers-types": "^4.20241127.0",
+    "@types/crypto-js": "^4.2.2",
     "drizzle-kit": "^0.28.1",
     "wrangler": "^3.88.0"
   }
